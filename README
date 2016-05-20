@@ -1,0 +1,78 @@
+Reference: http://arxiv.org/abs/1508.00497
+
+Report any bugs/issues to shekhawat.ashivni@gmail.com
+
+Prerequisites
+=============
+
+The provided code is in the python language. It assumes that numpy, scipy, and ASE (https://wiki.fysik.dtu.dk/ase/) are installed 
+(as well as some other standard python packages). 
+
+
+Extraction
+==========
+unzipping the archive must create the following files
+
+_cGBUtils.c
+_cPolyUtils.c
+polyCrystal.py
+grainBdr.py  
+setup.py  
+test.py
+
+
+
+Installation
+============
+
+Compile the c extension with the following command
+
+python setup.py build_ext --inplace
+
+This should result in two modules named _cGBUtils.so and _cPolyUtils.so
+
+Testing
+=======
+
+A sample use of the code is provided in the file test.py Run it with the 
+following command
+
+python test.py
+
+This should create the following files
+
+testGB_1Periodic.cfg
+testGB_1Periodic.pdb
+testGB_1Periodic.lammps
+
+testGB_2Periodic.cfg
+testGB_2Periodic.pdb
+testGB_2Periodic.lammps
+
+testPoly_2Periodic.cfg
+testPoly_2Periodic.pdb
+testPoly_2Periodic.lammps
+
+which contain the generated 1 periodic GB, 2 periodic GB, and the polycrystal in cfg, pdb and lammps data format, respectively. 
+
+
+Usage
+=====
+Before using the provided code in python, it needs to be imported with a command like
+
+import grainBdr as gb
+
+To generate a GB with n11, n12 = 1, 2 and n21, n22 = 2, 1 with a "width" 100 use the following command (see the reference at the beginning of this file for definitions of n11, n12 etc)
+
+cr = gb.onePeriodicGB(N1=[1,2],N2=[2,1],cell_width=100,verbose=False)
+
+The returned object (cr) is of type ase.Atoms
+
+Similary, the module to generate polycrystals can be used as 
+
+import polyCrystal as pc
+
+To generate a polycrystal with size 100x100 angstroms, and 4 grains (randomly oriented and positioned) use the following command 
+
+cr = pc.periodicCrystal(L=numpy.array([100,100]),N=4)
+
