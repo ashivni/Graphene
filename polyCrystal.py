@@ -13,9 +13,9 @@ import copy
 import _cPolyUtils
 import warnings
 
-def periodicCrystal(L=numpy.array([100,100]),N=4):
+def periodicCrystal(L=numpy.array([100,100]),N=4,tol=1E-5,verbose=False):
 	tr = periodicVoronoiCell(L=L,N=N)
-	tr_rel = cvtRelax(tr,verbose=False,tol=1e-5)
+	tr_rel = cvtRelax(tr,verbose=verbose,tol=tol)
 	cr = tr2gr(tr_rel)
 
 	return cr
@@ -512,12 +512,12 @@ def tr2gr(tr,periodic=True,num=[6,6,6],cutoff=0.1,vorMet = True):
 	bPos = pos[boundary==1,:]
 	if len(bPos) > 1:
 		# Find minDist with c routine
-		minInd = numpy.zeros(len(bPos)-1)
-		minDist = numpy.zeros(len(bPos)-1)
+		minInd = numpy.zeros(len(bPos))
+		minDist = numpy.zeros(len(bPos))
 		_cPolyUtils.selfClosest(tr.cell[0,0],tr.cell[1,1],bPos[:,0],bPos[:,1],minInd,minDist)
 
 		dist = numpy.ones(len(pos))*2*cutoff
-		dist[boundary[:-1]==1] = minDist
+		dist[numpy.where((boundary==1)[:-1])[0]] = minDist
 		closeFlag[dist<cutoff] = 1
 
 		tags[boundary==1] = 2
