@@ -1,7 +1,7 @@
 Cite as
-Large-scale experimental and theoretical study of graphene grain boundary structures, Colin Ophus, Ashivni Shekhawat, Haider Rasool, and Alex Zettl, Phys. Rev. B 92, 205402
+* Large-scale experimental and theoretical study of graphene grain boundary structures, Colin Ophus, Ashivni Shekhawat, Haider Rasool, and Alex Zettl, Phys. Rev. B 92, 205402
 
-Toughness and strength of nanocrystalline graphene, A Shekhawat, RO Ritchie - Nature communications, 2016
+* Toughness and strength of nanocrystalline graphene, A Shekhawat, RO Ritchie - Nature communications, 2016
 
 Report any bugs/issues to shekhawat.ashivni@gmail.com
 
